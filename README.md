@@ -1,2 +1,3002 @@
 # GOATED
 Clan website
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOATED Clan.CODM - Elite Mobile Warfare</title>
+    <style>
+        :root {
+            --primary: #ff4655;
+            --secondary: #0f1923;
+            --dark: #1a2a3a;
+            --light: #ece8e1;
+            --danger: #f44336;
+            --success: #4CAF50;
+            --warning: #ff9800;
+            --info: #2196F3;
+            --gold: #FFD700;
+            --legendary: #9c27b0;
+            --notification: #ff4655;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary);
+            color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: url('https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt29d7c4f6bc077e9e/5eb26f54402b8b4d13a56656/COD_Mobile_Season_7_Key_Art.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+        }
+        
+        .container {
+            background-color: rgba(26, 42, 58, 0.95);
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            color: rgba(236, 232, 225, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: rgba(236, 232, 225, 0.9);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgba(45, 58, 74, 0.8);
+            color: var(--light);
+            font-size: 16px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 70, 85, 0.3);
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        button:hover {
+            background: #ff2d3e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .success-message {
+            color: var(--success);
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .dashboard {
+            display: none;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+        
+        .user-info {
+            background: rgba(45, 58, 74, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-pic-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+        
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+        
+        .profile-pic-upload {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .profile-pic-upload input {
+            display: none;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .status-pending {
+            background: var(--warning);
+            color: black;
+        }
+        
+        .status-accepted {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status-rejected {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .status-member {
+            background: var(--info);
+            color: white;
+        }
+        
+        .status-admin {
+            background: var(--legendary);
+            color: white;
+        }
+        
+        .status-applicant {
+            background: var(--warning);
+            color: black;
+        }
+        
+        .application-form {
+            margin-top: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border-radius: 5px;
+            background: rgba(45, 58, 74, 0.8);
+            color: var(--light);
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .logout-btn {
+            background: #607d8b;
+            margin-top: 30px;
+        }
+        
+        .logout-btn:hover {
+            background: #546e7a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(96, 125, 139, 0.4);
+        }
+        
+        .admin-dashboard {
+            display: none;
+        }
+        
+        .admin-alert {
+            background: var(--danger);
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-left: 5px solid white;
+        }
+        
+        .user-card {
+            background: rgba(45, 58, 74, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .accept-btn {
+            background: var(--success);
+        }
+        
+        .accept-btn:hover {
+            background: #3d8b40;
+        }
+        
+        .reject-btn {
+            background: var(--danger);
+        }
+        
+        .reject-btn:hover {
+            background: #d32f2f;
+        }
+        
+        .ban-btn {
+            background: var(--danger);
+        }
+        
+        .ban-btn:hover {
+            background: #d32f2f;
+        }
+        
+        .secondary-btn {
+            background: #607d8b;
+        }
+        
+        .secondary-btn:hover {
+            background: #546e7a;
+        }
+        
+        .rank-info {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .rank-column {
+            flex: 1;
+        }
+        
+        .activity-log {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            background: rgba(45, 58, 74, 0.3);
+        }
+        
+        .activity-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-time {
+            color: rgba(236, 232, 225, 0.6);
+            font-size: 12px;
+            margin-top: 3px;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .account-actions {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+        
+        .danger-zone {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 5px;
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid var(--danger);
+        }
+        
+        .danger-zone h4 {
+            color: var(--danger);
+            margin-bottom: 10px;
+        }
+        
+        .rank-legendary {
+            color: var(--legendary);
+            font-weight: bold;
+        }
+        
+        .rank-gold {
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--notification);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--dark);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            border-left: 5px solid var(--primary);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            border-left-color: var(--success);
+        }
+        
+        .notification.error {
+            border-left-color: var(--danger);
+        }
+        
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+        
+        .notification-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .notification-close {
+            margin-left: 10px;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        
+        .notification-close:hover {
+            opacity: 1;
+        }
+        
+        .clan-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: rgba(45, 58, 74, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 5px 0;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: rgba(236, 232, 225, 0.8);
+        }
+        
+        .member-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        
+        .member-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .member-item:last-child {
+            border-bottom: none;
+        }
+        
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            flex: 1;
+        }
+        
+        .member-name {
+            font-weight: bold;
+        }
+        
+        .member-details {
+            font-size: 12px;
+            color: rgba(236, 232, 225, 0.7);
+            margin-top: 3px;
+        }
+        
+        /* Clan Settings Editor Styles */
+        .clan-stats-settings {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .activity-edit-item, .member-edit-item {
+            background: rgba(45, 58, 74, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .remove-activity, .remove-member {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .member-avatar-edit {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        
+        .member-avatar-edit img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-edit-fields {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .clan-banner {
+            width: 100%;
+            height: 150px;
+            background-color: rgba(45, 58, 74, 0.5);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .clan-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .clan-banner-upload {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .clan-banner-upload input {
+            display: none;
+        }
+        
+        /* Website Settings Styles */
+        .website-settings {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(45, 58, 74, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .rank-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .admin-actions {
+                flex-direction: column;
+            }
+            
+            .admin-actions button {
+                width: 100%;
+            }
+            
+            .clan-stats, .clan-stats-settings {
+                grid-template-columns: 1fr;
+            }
+            
+            .notification {
+                width: calc(100% - 40px);
+                left: 20px;
+                right: auto;
+            }
+            
+            .member-edit-fields {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .member-avatar-edit {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification System -->
+    <div id="notificationContainer"></div>
+
+    <!-- Login Container -->
+    <div class="container" id="loginContainer">
+        <header>
+            <div class="logo" id="mainLogo">GOATED Clan.CODM</div>
+            <p class="tagline" id="mainTagline">Elite Mobile Warfare | Season 7</p>
+        </header>
+        
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+        
+        <button onclick="login()">Login</button>
+        <button onclick="showAdminLogin()" style="background: var(--legendary); margin-top: 10px;">Admin Login</button>
+        
+        <p id="loginError" class="error-message"></p>
+        
+        <p style="text-align: center; margin-top: 20px; color: rgba(236, 232, 225, 0.7);">
+            Don't have an account? <a href="#" onclick="showRegister()" style="color: var(--primary); text-decoration: none; font-weight: bold;">Register here</a>
+        </p>
+    </div>
+    
+    <!-- Register Container -->
+    <div class="container" id="registerContainer" style="display: none;">
+        <header>
+            <div class="logo" id="registerLogo">Join GOATED Clan</div>
+            <p class="tagline" id="registerTagline">Prove your worth on the battlefield</p>
+        </header>
+        
+        <div class="form-group">
+            <label for="regUsername">Username</label>
+            <input type="text" id="regUsername" placeholder="Choose a username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="regPassword">Password (min 8 characters)</label>
+            <input type="password" id="regPassword" placeholder="Create a strong password" required minlength="8">
+        </div>
+        
+        <div class="form-group">
+            <label for="regCODMName">CODM In-Game Name</label>
+            <input type="text" id="regCODMName" placeholder="Your exact Call of Duty: Mobile username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="regLevel">Account Level (1-400)</label>
+            <input type="number" id="regLevel" placeholder="Your current level" min="1" max="400" required>
+        </div>
+        
+        <div class="rank-info">
+            <div class="rank-column">
+                <label for="regMPRank">Multiplayer Rank</label>
+                <select id="regMPRank" required>
+                    <option value="">Select Rank</option>
+                    <option value="Rookie">Rookie</option>
+                    <option value="Veteran">Veteran</option>
+                    <option value="Elite">Elite</option>
+                    <option value="Pro">Pro</option>
+                    <option value="Master">Master</option>
+                    <option value="Legendary" class="rank-legendary">Legendary</option>
+                </select>
+            </div>
+            <div class="rank-column">
+                <label for="regBRRank">Battle Royale Rank</label>
+                <select id="regBRRank" required>
+                    <option value="">Select Rank</option>
+                    <option value="Rookie">Rookie</option>
+                    <option value="Veteran">Veteran</option>
+                    <option value="Elite">Elite</option>
+                    <option value="Pro">Pro</option>
+                    <option value="Master">Master</option>
+                    <option value="Legendary" class="rank-legendary">Legendary</option>
+                </select>
+            </div>
+        </div>
+        
+        <button onclick="register()">Register</button>
+        <p id="registerError" class="error-message"></p>
+        <p id="registerSuccess" class="success-message"></p>
+        
+        <button class="logout-btn" onclick="showLogin()">Back to Login</button>
+    </div>
+    
+    <!-- User Dashboard -->
+    <div class="container dashboard" id="userDashboard">
+        <div class="dashboard-header">
+            <h2>Welcome, <span id="dashboardUsername"></span></h2>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        
+        <div class="user-info">
+            <div class="profile-pic-container">
+                <img id="userProfilePic" class="profile-pic" src="https://via.placeholder.com/100" alt="Profile Picture">
+                <label class="profile-pic-upload">
+                    <input type="file" id="profilePicUpload" accept="image/*" onchange="uploadProfilePicture()">
+                    <span>+</span>
+                </label>
+            </div>
+            <p>CODM Name: <strong id="dashboardCODMName"></strong></p>
+            <p>Account Level: <strong id="dashboardLevel"></strong></p>
+            <p>MP Rank: <strong id="dashboardMPRank"></strong></p>
+            <p>BR Rank: <strong id="dashboardBRRank"></strong></p>
+            <p>Status: <span id="dashboardStatus" class="status-badge"></span></p>
+        </div>
+        
+        <div class="tab-container">
+            <div class="tab active" onclick="switchTab('applicationTab')">Application</div>
+            <div class="tab" onclick="switchTab('accountTab')">Account Settings</div>
+            <div class="tab" onclick="switchTab('clanTab')">Clan Info</div>
+        </div>
+        
+        <div id="applicationTab" class="tab-content active">
+            <div id="applicationStatus">
+                <h3>Clan Application</h3>
+                <div id="statusMessage">
+                    <p>You haven't submitted an application yet.</p>
+                    <button onclick="showApplicationForm()">Apply to Join Clan</button>
+                </div>
+            </div>
+            
+            <div id="applicationForm" class="application-form" style="display: none;">
+                <h3>Application Form</h3>
+                <p style="margin-bottom: 15px; color: rgba(236, 232, 225, 0.8);">
+                    Please provide detailed information about your skills and experience. Legendary ranked players get priority review.
+                </p>
+                <label for="applicationReason">Why should you join GOATED Clan? (Min. 100 characters)</label>
+                <textarea id="applicationReason" placeholder="Tell us about your skills, experience, play style, preferred roles, and why you want to join our clan... (Minimum 100 characters)" minlength="100"></textarea>
+                <button onclick="submitApplication()">Submit Application</button>
+                <button class="logout-btn" onclick="hideApplicationForm()">Cancel</button>
+            </div>
+        </div>
+        
+        <div id="accountTab" class="tab-content">
+            <h3>Account Settings</h3>
+            
+            <div class="form-group">
+                <label for="changePasswordCurrent">Current Password</label>
+                <input type="password" id="changePasswordCurrent" placeholder="Enter your current password">
+            </div>
+            
+            <div class="form-group">
+                <label for="changePasswordNew">New Password</label>
+                <input type="password" id="changePasswordNew" placeholder="Enter new password (min 8 characters)" minlength="8">
+            </div>
+            
+            <div class="form-group">
+                <label for="changePasswordConfirm">Confirm New Password</label>
+                <input type="password" id="changePasswordConfirm" placeholder="Confirm new password">
+            </div>
+            
+            <button onclick="changePassword()">Change Password</button>
+            <p id="passwordChangeError" class="error-message"></p>
+            <p id="passwordChangeSuccess" class="success-message"></p>
+            
+            <div class="danger-zone">
+                <h4>Danger Zone</h4>
+                <p style="margin-bottom: 10px; color: rgba(236, 232, 225, 0.8);">
+                    Deleting your account will remove all your data permanently. This action cannot be undone.
+                </p>
+                <button class="ban-btn" onclick="confirmDeleteAccount()">Delete My Account</button>
+            </div>
+        </div>
+        
+        <div id="clanTab" class="tab-content">
+            <div class="clan-banner">
+                <img id="clanBannerImg" src="" alt="Clan Banner">
+                <label class="clan-banner-upload" style="display: none;" id="clanBannerUploadBtn">
+                    <input type="file" id="clanBannerUpload" accept="image/*" onchange="uploadClanBanner()">
+                    Change Banner
+                </label>
+            </div>
+            
+            <h3>Clan Information</h3>
+            
+            <div class="clan-stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalMembers">47</div>
+                    <div class="stat-label">Total Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="legendaryPlayers">12</div>
+                    <div class="stat-label">Legendary Players</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgLevel">287</div>
+                    <div class="stat-label">Average Level</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="winRate">72%</div>
+                    <div class="stat-label">Tournament Win Rate</div>
+                </div>
+            </div>
+            
+            <h4>Recent Clan Activity</h4>
+            <div class="activity-log" id="clanActivityLog">
+                <div class="activity-item">
+                    <div>🎖️ Clan ranked #3 in last week's tournament</div>
+                    <div class="activity-time">2 days ago</div>
+                </div>
+                <div class="activity-item">
+                    <div>🏆 Tournament registration opens tomorrow</div>
+                    <div class="activity-time">4 days ago</div>
+                </div>
+                <div class="activity-item">
+                    <div>🆕 3 new members joined this week</div>
+                    <div class="activity-time">1 week ago</div>
+                </div>
+            </div>
+            
+            <h4 style="margin-top: 20px;">Top Members</h4>
+            <div class="member-list" id="clanTopMembers">
+                <div class="member-item">
+                    <div class="member-avatar"><img src="https://via.placeholder.com/40" alt="DS"></div>
+                    <div class="member-info">
+                        <div class="member-name">DEADSHOT</div>
+                        <div class="member-details">Level 400 | MP: Legendary | BR: Legendary</div>
+                    </div>
+                </div>
+                <div class="member-item">
+                    <div class="member-avatar"><img src="https://via.placeholder.com/40" alt="SK"></div>
+                    <div class="member-info">
+                        <div class="member-name">SniperKing</div>
+                        <div class="member-details">Level 387 | MP: Legendary | BR: Master</div>
+                    </div>
+                </div>
+                <div class="member-item">
+                    <div class="member-avatar"><img src="https://via.placeholder.com/40" alt="TG"></div>
+                    <div class="member-info">
+                        <div class="member-name">TacticalGamer</div>
+                        <div class="member-details">Level 355 | MP: Legendary | BR: Legendary</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Login -->
+    <div class="container" id="adminLoginContainer" style="display: none;">
+        <header>
+            <div class="logo">Admin Portal</div>
+            <p class="tagline">GOATED Clan Management System</p>
+        </header>
+        
+        <div class="form-group">
+            <label for="adminUsername">Username</label>
+            <input type="text" id="adminUsername" placeholder="Enter admin username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="adminPassword">Password</label>
+            <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+        </div>
+        
+        <button onclick="adminLogin()">Login</button>
+        <p id="adminLoginError" class="error-message"></p>
+        
+        <button class="logout-btn" onclick="showLogin()">Back to Login</button>
+    </div>
+    
+    <!-- Admin Dashboard -->
+    <div class="container admin-dashboard" id="adminDashboard">
+        <div class="admin-alert">
+            ADMIN DASHBOARD - RESTRICTED ACCESS | Last login: <span id="lastLoginTime"></span>
+            <div id="adminNotificationBadge" class="notification-badge" style="display: none;"></div>
+        </div>
+        
+        <div class="dashboard-header">
+            <h2>Admin Dashboard</h2>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        
+        <div class="tab-container">
+            <div class="tab active" onclick="switchAdminTab('applicationsTab')">Applications</div>
+            <div class="tab" onclick="switchAdminTab('usersTab')">User Management</div>
+            <div class="tab" onclick="switchAdminTab('activityTab')">Activity Log</div>
+            <div class="tab" onclick="switchAdminTab('notificationsTab')">Notifications</div>
+            <div class="tab" onclick="switchAdminTab('clanSettingsTab')">Clan Settings</div>
+            <div class="tab" onclick="switchAdminTab('websiteSettingsTab')">Website Settings</div>
+        </div>
+        
+        <div id="applicationsTab" class="tab-content active">
+            <h3>Pending Applications <span id="pendingAppsCount" class="status-badge status-pending" style="display: none;"></span></h3>
+            <div id="applicationsList">
+                <!-- Applications will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="usersTab" class="tab-content">
+            <h3>User Management</h3>
+            <div id="usersList">
+                <!-- Users will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="activityTab" class="tab-content">
+            <h3>Activity Log</h3>
+            <div class="activity-log" id="activityLog">
+                <!-- Activity logs will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="notificationsTab" class="tab-content">
+            <h3>Notifications</h3>
+            <div class="activity-log" id="notificationsList">
+                <!-- Notifications will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="clanSettingsTab" class="tab-content">
+            <h3>Clan Settings</h3>
+            
+            <div class="form-group">
+                <label for="clanName">Clan Name</label>
+                <input type="text" id="clanName" placeholder="Enter clan name" value="GOATED Clan.CODM">
+            </div>
+            
+            <div class="form-group">
+                <label for="clanTag">Clan Tag</label>
+                <input type="text" id="clanTag" placeholder="Enter clan tag (e.g., GOAT)" maxlength="4" value="GOAT">
+            </div>
+            
+            <div class="form-group">
+                <label for="clanLogo">Clan Logo URL</label>
+                <input type="text" id="clanLogo" placeholder="Enter image URL for clan logo">
+                <img id="clanLogoPreview" class="image-preview" src="" alt="Clan Logo Preview">
+            </div>
+            
+            <div class="form-group">
+                <label for="clanBannerUrl">Clan Banner URL</label>
+                <input type="text" id="clanBannerUrl" placeholder="Enter image URL for clan banner">
+                <img id="clanBannerPreview" class="image-preview" src="" alt="Clan Banner Preview">
+            </div>
+            
+            <h4 style="margin-top: 20px;">Clan Statistics</h4>
+            
+            <div class="clan-stats-settings">
+                <div class="form-group">
+                    <label for="totalMembersSetting">Total Members</label>
+                    <input type="number" id="totalMembersSetting" min="0" value="47">
+                </div>
+                
+                <div class="form-group">
+                    <label for="legendaryPlayersSetting">Legendary Players</label>
+                    <input type="number" id="legendaryPlayersSetting" min="0" value="12">
+                </div>
+                
+                <div class="form-group">
+                    <label for="avgLevelSetting">Average Level</label>
+                    <input type="number" id="avgLevelSetting" min="1" max="400" value="287">
+                </div>
+                
+                <div class="form-group">
+                    <label for="winRateSetting">Tournament Win Rate (%)</label>
+                    <input type="number" id="winRateSetting" min="0" max="100" value="72">
+                </div>
+            </div>
+            
+            <h4 style="margin-top: 20px;">Recent Clan Activity</h4>
+            <div id="clanActivities">
+                <div class="activity-edit-item">
+                    <button class="remove-activity" onclick="removeActivityField('activity1')">×</button>
+                    <div class="form-group">
+                        <label>Icon</label>
+                        <input type="text" id="activityIcon_activity1" value="🎖️" placeholder="Enter emoji icon">
+                    </div>
+                    <div class="form-group">
+                        <label>Activity Text</label>
+                        <input type="text" id="activityText_activity1" value="Clan ranked #3 in last week's tournament" placeholder="Enter activity description">
+                    </div>
+                    <div class="form-group">
+                        <label>Days Ago</label>
+                        <input type="number" id="activityDays_activity1" value="2" min="0" placeholder="How many days ago">
+                    </div>
+                </div>
+                <div class="activity-edit-item">
+                    <button class="remove-activity" onclick="removeActivityField('activity2')">×</button>
+                    <div class="form-group">
+                        <label>Icon</label>
+                        <input type="text" id="activityIcon_activity2" value="🏆" placeholder="Enter emoji icon">
+                    </div>
+                    <div class="form-group">
+                        <label>Activity Text</label>
+                        <input type="text" id="activityText_activity2" value="Tournament registration opens tomorrow" placeholder="Enter activity description">
+                    </div>
+                    <div class="form-group">
+                        <label>Days Ago</label>
+                        <input type="number" id="activityDays_activity2" value="4" min="0" placeholder="How many days ago">
+                    </div>
+                </div>
+                <div class="activity-edit-item">
+                    <button class="remove-activity" onclick="removeActivityField('activity3')">×</button>
+                    <div class="form-group">
+                        <label>Icon</label>
+                        <input type="text" id="activityIcon_activity3" value="🆕" placeholder="Enter emoji icon">
+                    </div>
+                    <div class="form-group">
+                        <label>Activity Text</label>
+                        <input type="text" id="activityText_activity3" value="3 new members joined this week" placeholder="Enter activity description">
+                    </div>
+                    <div class="form-group">
+                        <label>Days Ago</label>
+                        <input type="number" id="activityDays_activity3" value="7" min="0" placeholder="How many days ago">
+                    </div>
+                </div>
+            </div>
+            <button class="secondary-btn" onclick="addActivityField()" style="margin-top: 10px;">+ Add Activity</button>
+            
+            <h4 style="margin-top: 20px;">Top Members</h4>
+            <div id="topMembers">
+                <div class="member-edit-item">
+                    <button class="remove-member" onclick="removeMemberField('member1')">×</button>
+                    <div class="member-edit-fields">
+                        <div class="member-avatar-edit">
+                            <img id="memberAvatar_member1" src="https://via.placeholder.com/40" alt="DS">
+                            <input type="file" id="memberAvatarUpload_member1" accept="image/*" style="display: none;" onchange="updateMemberAvatar('member1')">
+                            <label for="memberAvatarUpload_member1" style="position: absolute; bottom: -5px; right: -5px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer;">+</label>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <input type="text" id="memberName_member1" value="DEADSHOT" placeholder="Member name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <input type="number" id="memberLevel_member1" value="400" min="1" max="400" placeholder="Member level">
+                    </div>
+                    <div class="rank-info">
+                        <div class="rank-column">
+                            <label>MP Rank</label>
+                            <select id="memberMPRank_member1">
+                                <option value="Rookie">Rookie</option>
+                                <option value="Veteran">Veteran</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Pro">Pro</option>
+                                <option value="Master">Master</option>
+                                <option value="Legendary" selected>Legendary</option>
+                            </select>
+                        </div>
+                        <div class="rank-column">
+                            <label>BR Rank</label>
+                            <select id="memberBRRank_member1">
+                                <option value="Rookie">Rookie</option>
+                                <option value="Veteran">Veteran</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Pro">Pro</option>
+                                <option value="Master">Master</option>
+                                <option value="Legendary" selected>Legendary</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-edit-item">
+                    <button class="remove-member" onclick="removeMemberField('member2')">×</button>
+                    <div class="member-edit-fields">
+                        <div class="member-avatar-edit">
+                            <img id="memberAvatar_member2" src="https://via.placeholder.com/40" alt="SK">
+                            <input type="file" id="memberAvatarUpload_member2" accept="image/*" style="display: none;" onchange="updateMemberAvatar('member2')">
+                            <label for="memberAvatarUpload_member2" style="position: absolute; bottom: -5px; right: -5px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer;">+</label>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <input type="text" id="memberName_member2" value="SniperKing" placeholder="Member name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <input type="number" id="memberLevel_member2" value="387" min="1" max="400" placeholder="Member level">
+                    </div>
+                    <div class="rank-info">
+                        <div class="rank-column">
+                            <label>MP Rank</label>
+                            <select id="memberMPRank_member2">
+                                <option value="Rookie">Rookie</option>
+                                <option value="Veteran">Veteran</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Pro">Pro</option>
+                                <option value="Master">Master</option>
+                                <option value="Legendary" selected>Legendary</option>
+                            </select>
+                        </div>
+                        <div class="rank-column">
+                            <label>BR Rank</label>
+                            <select id="memberBRRank_member2">
+                                <option value="Rookie">Rookie</option>
+                                <option value="Veteran">Veteran</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Pro">Pro</option>
+                                <option value="Master" selected>Master</option>
+                                <option value="Legendary">Legendary</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-edit-item">
+                    <button class="remove-member" onclick="removeMemberField('member3')">×</button>
+                    <div class="member-edit-fields">
+                        <div class="member-avatar-edit">
+                            <img id="memberAvatar_member3" src="https://via.placeholder.com/40" alt="TG">
+                            <input type="file" id="memberAvatarUpload_member3" accept="image/*" style="display: none;" onchange="updateMemberAvatar('member3')">
+                            <label for="memberAvatarUpload_member3" style="position: absolute; bottom: -5px; right: -5px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer;">+</label>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <input type="text" id="memberName_member3" value="TacticalGamer" placeholder="Member name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <input type="number" id="memberLevel_member3" value="355" min="1" max="400" placeholder="Member level">
+                    </div>
+                    <div class="rank-info">
+                        <div class="rank-column">
+                            <label>MP Rank</label>
+                            <select id="memberMPRank_member3">
+                                <option value="Rookie">Rookie</option>
+                                <option value="Veteran">Veteran</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Pro">Pro</option>
+                                <option value="Master">Master</option>
+                                <option value="Legendary" selected>Legendary</option>
+                            </select>
+                        </div>
+                        <div class="rank-column">
+                            <label>BR Rank</label>
+                            <select id="memberBRRank_member3">
+                                <option value="Rookie">Rookie</option>
+                                <option value="Veteran">Veteran</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Pro">Pro</option>
+                                <option value="Master">Master</option>
+                                <option value="Legendary" selected>Legendary</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="secondary-btn" onclick="addTopMemberField()" style="margin-top: 10px;">+ Add Top Member</button>
+            
+            <button onclick="saveClanSettings()" style="margin-top: 30px;">Save Clan Settings</button>
+            <p id="clanSettingsError" class="error-message"></p>
+            <p id="clanSettingsSuccess" class="success-message"></p>
+        </div>
+        
+        <div id="websiteSettingsTab" class="tab-content">
+            <h3>Website Settings</h3>
+            <div class="website-settings">
+                <div class="form-group">
+                    <label for="websiteName">Website Name</label>
+                    <input type="text" id="websiteName" placeholder="Enter website name" value="GOATED Clan.CODM">
+                </div>
+                
+                <div class="form-group">
+                    <label for="websiteTagline">Website Tagline</label>
+                    <input type="text" id="websiteTagline" placeholder="Enter website tagline" value="Elite Mobile Warfare | Season 7">
+                </div>
+                
+                <div class="form-group">
+                    <label for="websiteLogo">Website Logo URL</label>
+                    <input type="text" id="websiteLogo" placeholder="Enter image URL for website logo">
+                    <img id="websiteLogoPreview" class="image-preview" src="" alt="Website Logo Preview">
+                </div>
+                
+                <div class="form-group">
+                    <label for="websiteBackground">Background Image URL</label>
+                    <input type="text" id="websiteBackground" placeholder="Enter image URL for background" value="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt29d7c4f6bc077e9e/5eb26f54402b8b4d13a56656/COD_Mobile_Season_7_Key_Art.jpg">
+                    <img id="websiteBackgroundPreview" class="image-preview" src="" alt="Background Preview">
+                </div>
+                
+                <div class="form-group">
+                    <label for="websiteTheme">Theme Color</label>
+                    <select id="websiteTheme">
+                        <option value="default" selected>Default (Red/Black)</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option>
+                        <option value="purple">Purple</option>
+                        <option value="gold">Gold</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="websiteRegistration">Allow New Registrations</label>
+                    <select id="websiteRegistration">
+                        <option value="true" selected>Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                
+                <button onclick="saveWebsiteSettings()" style="margin-top: 20px;">Save Website Settings</button>
+                <p id="websiteSettingsError" class="error-message"></p>
+                <p id="websiteSettingsSuccess" class="success-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Database with more realistic data
+        let users = [
+            {
+                id: 1,
+                username: "player1",
+                password: "test123",
+                codmName: "CODM_Player1",
+                level: 150,
+                mpRank: "Master",
+                brRank: "Pro",
+                isAdmin: false,
+                status: "Pending",
+                joinDate: new Date(2023, 5, 15).toISOString(),
+                notifications: [],
+                profilePic: "https://via.placeholder.com/100"
+            },
+            {
+                id: 2,
+                username: "admin",
+                password: "admin123",
+                codmName: "DEADSHOT",
+                level: 400,
+                mpRank: "Legendary",
+                brRank: "Legendary",
+                isAdmin: true,
+                status: "Admin",
+                joinDate: new Date(2023, 0, 1).toISOString(),
+                notifications: [],
+                profilePic: "https://via.placeholder.com/100"
+            },
+            {
+                id: 3,
+                username: "proplayer",
+                password: "codmpro",
+                codmName: "SniperKing",
+                level: 300,
+                mpRank: "Legendary",
+                brRank: "Master",
+                isAdmin: false,
+                status: "Member",
+                joinDate: new Date(2023, 3, 22).toISOString(),
+                notifications: [],
+                profilePic: "https://via.placeholder.com/100"
+            }
+        ];
+        
+        let applications = [
+            {
+                id: 1,
+                userId: 1,
+                username: "player1",
+                codmName: "CODM_Player1",
+                level: 150,
+                mpRank: "Master",
+                brRank: "Pro",
+                reason: "I want to join the clan to improve my skills and compete in tournaments. I have experience in ranked MP and regularly play BR with my squad.",
+                status: "Pending",
+                applyDate: new Date(2023, 5, 16).toISOString(),
+                reviewed: false
+            }
+        ];
+        
+        let activityLogs = [
+            {
+                id: 1,
+                type: "login",
+                userId: 2,
+                username: "admin",
+                message: "Admin logged in",
+                timestamp: new Date().toISOString()
+            },
+            {
+                id: 2,
+                type: "application",
+                userId: 1,
+                username: "player1",
+                message: "New application submitted by player1 (CODM_Player1)",
+                timestamp: new Date(2023, 5, 16).toISOString()
+            },
+            {
+                id: 3,
+                type: "registration",
+                userId: 3,
+                username: "proplayer",
+                message: "New user registered: proplayer (SniperKing)",
+                timestamp: new Date(2023, 3, 22).toISOString()
+            }
+        ];
+        
+        let notifications = [
+            {
+                id: 1,
+                userId: 2, // Admin
+                type: "new-application",
+                title: "New Clan Application",
+                message: "player1 has submitted an application to join the clan",
+                timestamp: new Date(2023, 5, 16).toISOString(),
+                read: false,
+                relatedId: 1 // Application ID
+            },
+            {
+                id: 2,
+                userId: 1, // player1
+                type: "application-status",
+                title: "Application Update",
+                message: "Your clan application is pending review",
+                timestamp: new Date(2023, 5, 16).toISOString(),
+                read: false,
+                relatedId: 1 // Application ID
+            }
+        ];
+        
+        // Clan settings data
+        let clanSettings = {
+            name: "GOATED Clan.CODM",
+            tag: "GOAT",
+            logo: "",
+            banner: "",
+            stats: {
+                totalMembers: 47,
+                legendaryPlayers: 12,
+                avgLevel: 287,
+                winRate: 72
+            },
+            activities: [
+                {
+                    icon: "🎖️",
+                    text: "Clan ranked #3 in last week's tournament",
+                    daysAgo: 2
+                },
+                {
+                    icon: "🏆",
+                    text: "Tournament registration opens tomorrow",
+                    daysAgo: 4
+                },
+                {
+                    icon: "🆕",
+                    text: "3 new members joined this week",
+                    daysAgo: 7
+                }
+            ],
+            topMembers: [
+                {
+                    initials: "DS",
+                    name: "DEADSHOT",
+                    level: 400,
+                    mpRank: "Legendary",
+                    brRank: "Legendary",
+                    avatar: "https://via.placeholder.com/40"
+                },
+                {
+                    initials: "SK",
+                    name: "SniperKing",
+                    level: 387,
+                    mpRank: "Legendary",
+                    brRank: "Master",
+                    avatar: "https://via.placeholder.com/40"
+                },
+                {
+                    initials: "TG",
+                    name: "TacticalGamer",
+                    level: 355,
+                    mpRank: "Legendary",
+                    brRank: "Legendary",
+                    avatar: "https://via.placeholder.com/40"
+                }
+            ]
+        };
+        
+        // Website settings
+        let websiteSettings = {
+            name: "GOATED Clan.CODM",
+            tagline: "Elite Mobile Warfare | Season 7",
+            logo: "",
+            background: "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt29d7c4f6bc077e9e/5eb26f54402b8b4d13a56656/COD_Mobile_Season_7_Key_Art.jpg",
+            theme: "default",
+            allowRegistration: true
+        };
+        
+        let currentUser = null;
+        let unreadAdminNotifications = 0;
+        
+        // Helper function to format dates
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+        
+        // Show notification
+        function showNotification(type, message, duration = 5000) {
+            const notificationContainer = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            let icon = 'ℹ️';
+            switch(type) {
+                case 'success': icon = '✅'; break;
+                case 'error': icon = '❌'; break;
+                case 'warning': icon = '⚠️'; break;
+            }
+            
+            notification.innerHTML = `
+                <span class="notification-icon">${icon}</span>
+                <span>${message}</span>
+                <span class="notification-close" onclick="this.parentElement.remove()">×</span>
+            `;
+            
+            notificationContainer.appendChild(notification);
+            
+            // Trigger the animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Auto-remove after duration
+            if (duration > 0) {
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, duration);
+            }
+        }
+        
+        // Upload profile picture
+        function uploadProfilePicture() {
+            const fileInput = document.getElementById('profilePicUpload');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                showNotification('error', 'Please select an image file');
+                return;
+            }
+            
+            if (file.size > 2 * 1024 * 1024) { // 2MB limit
+                showNotification('error', 'Image size should be less than 2MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('userProfilePic');
+                img.src = e.target.result;
+                
+                // Update user's profile picture in database
+                users = users.map(user => {
+                    if (user.id === currentUser.id) {
+                        return {...user, profilePic: e.target.result};
+                    }
+                    return user;
+                });
+                
+                currentUser.profilePic = e.target.result;
+                
+                showNotification('success', 'Profile picture updated successfully!');
+                
+                // Log activity
+                const activity = {
+                    id: activityLogs.length + 1,
+                    type: "profile-update",
+                    userId: currentUser.id,
+                    username: currentUser.username,
+                    message: `${currentUser.username} updated their profile picture`,
+                    timestamp: new Date().toISOString()
+                };
+                activityLogs.unshift(activity);
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Upload clan banner
+        function uploadClanBanner() {
+            const fileInput = document.getElementById('clanBannerUpload');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                showNotification('error', 'Please select an image file');
+                return;
+            }
+            
+            if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                showNotification('error', 'Image size should be less than 5MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('clanBannerImg');
+                img.src = e.target.result;
+                clanSettings.banner = e.target.result;
+                
+                showNotification('success', 'Clan banner updated successfully!');
+                
+                // Log activity
+                const activity = {
+                    id: activityLogs.length + 1,
+                    type: "clan-settings",
+                    userId: currentUser.id,
+                    username: currentUser.username,
+                    message: `${currentUser.username} updated the clan banner`,
+                    timestamp: new Date().toISOString()
+                };
+                activityLogs.unshift(activity);
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Update member avatar in admin panel
+        function updateMemberAvatar(memberId) {
+            const fileInput = document.getElementById(`memberAvatarUpload_${memberId}`);
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                showNotification('error', 'Please select an image file');
+                return;
+            }
+            
+            if (file.size > 2 * 1024 * 1024) { // 2MB limit
+                showNotification('error', 'Image size should be less than 2MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById(`memberAvatar_${memberId}`);
+                img.src = e.target.result;
+                
+                // Update in clan settings
+                const memberIndex = clanSettings.topMembers.findIndex(m => 
+                    `member${clanSettings.topMembers.indexOf(m) + 1}` === memberId
+                );
+                
+                if (memberIndex !== -1) {
+                    clanSettings.topMembers[memberIndex].avatar = e.target.result;
+                }
+                
+                showNotification('success', 'Member avatar updated!');
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Show login form
+        function showLogin() {
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('registerContainer').style.display = 'none';
+            document.getElementById('userDashboard').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('adminLoginContainer').style.display = 'none';
+            document.getElementById('loginError').textContent = '';
+        }
+        
+        // Show register form
+        function showRegister() {
+            if (!websiteSettings.allowRegistration) {
+                showNotification('error', 'New registrations are currently disabled by admin');
+                return;
+            }
+            
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('registerContainer').style.display = 'block';
+            document.getElementById('userDashboard').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('adminLoginContainer').style.display = 'none';
+            document.getElementById('registerError').textContent = '';
+            document.getElementById('registerSuccess').textContent = '';
+        }
+        
+        // Show admin login
+        function showAdminLogin() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('registerContainer').style.display = 'none';
+            document.getElementById('userDashboard').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('adminLoginContainer').style.display = 'block';
+            document.getElementById('adminLoginError').textContent = '';
+        }
+        
+        // Login function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (!user) {
+                document.getElementById('loginError').textContent = "Invalid username or password!";
+                return;
+            }
+            
+            currentUser = user;
+            
+            // Log activity
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "login",
+                userId: user.id,
+                username: user.username,
+                message: `User logged in: ${user.username}`,
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            
+            // Check for unread notifications
+            if (user.isAdmin) {
+                unreadAdminNotifications = notifications.filter(n => n.userId === 2 && !n.read).length;
+                updateAdminNotificationBadge();
+            } else {
+                const unreadUserNotifications = notifications.filter(n => n.userId === user.id && !n.read);
+                if (unreadUserNotifications.length > 0) {
+                    showNotification('info', `You have ${unreadUserNotifications.length} unread notifications`, 3000);
+                }
+            }
+            
+            if (user.isAdmin) {
+                showAdminDashboard();
+            } else {
+                showUserDashboard();
+            }
+        }
+        
+        // Admin login
+        function adminLogin() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            const user = users.find(u => u.username === username && u.password === password && u.isAdmin);
+            
+            if (!user) {
+                document.getElementById('adminLoginError').textContent = "Invalid admin credentials!";
+                return;
+            }
+            
+            currentUser = user;
+            
+            // Log activity
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "login",
+                userId: user.id,
+                username: user.username,
+                message: "Admin logged in",
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            
+            // Check for unread notifications
+            unreadAdminNotifications = notifications.filter(n => n.userId === 2 && !n.read).length;
+            updateAdminNotificationBadge();
+            
+            showAdminDashboard();
+        }
+        
+        // Register function
+        function register() {
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const codmName = document.getElementById('regCODMName').value;
+            const level = parseInt(document.getElementById('regLevel').value);
+            const mpRank = document.getElementById('regMPRank').value;
+            const brRank = document.getElementById('regBRRank').value;
+            
+            if (!username || !password || !codmName || !mpRank || !brRank || isNaN(level)) {
+                document.getElementById('registerError').textContent = "All fields are required!";
+                return;
+            }
+            
+            if (password.length < 8) {
+                document.getElementById('registerError').textContent = "Password must be at least 8 characters!";
+                return;
+            }
+            
+            if (level < 1 || level > 400) {
+                document.getElementById('registerError').textContent = "Level must be between 1 and 400!";
+                return;
+            }
+            
+            if (users.some(user => user.username === username)) {
+                document.getElementById('registerError').textContent = "Username already exists!";
+                return;
+            }
+            
+            if (users.some(user => user.codmName === codmName)) {
+                document.getElementById('registerError').textContent = "CODM name already registered!";
+                return;
+            }
+            
+            const newUser = {
+                id: users.length + 1,
+                username,
+                password,
+                codmName,
+                level,
+                mpRank,
+                brRank,
+                isAdmin: false,
+                status: "Applicant",
+                joinDate: new Date().toISOString(),
+                notifications: [],
+                profilePic: "https://via.placeholder.com/100"
+            };
+            
+            users.push(newUser);
+            
+            // Log activity
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "registration",
+                userId: newUser.id,
+                username: newUser.username,
+                message: `New user registered: ${username} (${codmName})`,
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            
+            // Notify admin
+            addUserNotification(
+                2, // Admin user ID
+                "new-user",
+                "New User Registration",
+                `${username} (${codmName}) has registered an account`,
+                newUser.id
+            );
+            
+            // Clear form
+            document.getElementById('regUsername').value = "";
+            document.getElementById('regPassword').value = "";
+            document.getElementById('regCODMName').value = "";
+            document.getElementById('regLevel').value = "";
+            document.getElementById('regMPRank').value = "";
+            document.getElementById('regBRRank').value = "";
+            
+            document.getElementById('registerError').textContent = "";
+            document.getElementById('registerSuccess').textContent = "Registration successful! You can now login.";
+            
+            showNotification('success', 'Registration successful! You can now login.');
+        }
+        
+        // Show user dashboard
+        function showUserDashboard() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('registerContainer').style.display = 'none';
+            document.getElementById('adminLoginContainer').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('userDashboard').style.display = 'block';
+            
+            // Update user info
+            document.getElementById('dashboardUsername').textContent = currentUser.username;
+            document.getElementById('dashboardCODMName').textContent = currentUser.codmName;
+            document.getElementById('dashboardLevel').textContent = currentUser.level;
+            document.getElementById('dashboardMPRank').textContent = currentUser.mpRank;
+            document.getElementById('dashboardBRRank').textContent = currentUser.brRank;
+            
+            // Set profile picture
+            document.getElementById('userProfilePic').src = currentUser.profilePic;
+            
+            // Set status
+            const statusElement = document.getElementById('dashboardStatus');
+            statusElement.textContent = currentUser.status;
+            statusElement.className = 'status-badge';
+            
+            if (currentUser.status === "Pending") {
+                statusElement.classList.add('status-pending');
+            } else if (currentUser.status === "Accepted") {
+                statusElement.classList.add('status-accepted');
+            } else if (currentUser.status === "Rejected") {
+                statusElement.classList.add('status-rejected');
+            } else if (currentUser.status === "Member") {
+                statusElement.classList.add('status-member');
+            } else if (currentUser.status === "Admin") {
+                statusElement.classList.add('status-admin');
+            } else if (currentUser.status === "Applicant") {
+                statusElement.classList.add('status-applicant');
+            }
+            
+            // Show/hide banner upload button based on admin status
+            document.getElementById('clanBannerUploadBtn').style.display = currentUser.isAdmin ? 'block' : 'none';
+            
+            // Set clan banner
+            const clanBannerImg = document.getElementById('clanBannerImg');
+            if (clanSettings.banner) {
+                clanBannerImg.src = clanSettings.banner;
+            } else {
+                clanBannerImg.src = '';
+                clanBannerImg.style.display = 'none';
+            }
+            
+            // Check for existing application
+            const userApp = applications.find(app => app.userId === currentUser.id);
+            if (userApp) {
+                document.getElementById('statusMessage').innerHTML = `
+                    <p>Your application status: 
+                        <span class="status-badge status-${userApp.status.toLowerCase()}">
+                            ${userApp.status}
+                        </span>
+                    </p>
+                    <p>Submitted on: ${formatDate(userApp.applyDate)}</p>
+                    <p>MP Rank: ${userApp.mpRank} | BR Rank: ${userApp.brRank}</p>
+                    <p>Level: ${userApp.level}</p>
+                    <p>Reason: ${userApp.reason}</p>
+                `;
+            }
+            
+            // Update clan info display
+            updateClanInfoDisplay();
+            
+            // Reset tabs to default
+            document.querySelectorAll('#userDashboard .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#userDashboard .tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelector('#userDashboard .tab').classList.add('active');
+            document.querySelector('#userDashboard .tab-content').classList.add('active');
+        }
+        
+        // Show admin dashboard
+        function showAdminDashboard() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('registerContainer').style.display = 'none';
+            document.getElementById('adminLoginContainer').style.display = 'none';
+            document.getElementById('userDashboard').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            
+            // Update last login time
+            document.getElementById('lastLoginTime').textContent = formatDate(new Date());
+            
+            // Load applications
+            const applicationsList = document.getElementById('applicationsList');
+            applicationsList.innerHTML = '';
+            
+            const pendingApps = applications.filter(app => app.status === "Pending");
+            const pendingCount = document.getElementById('pendingAppsCount');
+            
+            if (pendingApps.length === 0) {
+                applicationsList.innerHTML = '<p>No pending applications.</p>';
+                pendingCount.style.display = 'none';
+            } else {
+                pendingCount.textContent = pendingApps.length;
+                pendingCount.style.display = 'inline-block';
+                
+                pendingApps.forEach(app => {
+                    const card = document.createElement('div');
+                    card.className = 'user-card';
+                    card.innerHTML = `
+                        <h4>${app.codmName} (${app.username})</h4>
+                        <p>Level: ${app.level} | MP: ${app.mpRank} | BR: ${app.brRank}</p>
+                        <p>Applied on: ${formatDate(app.applyDate)}</p>
+                        <p>${app.reason}</p>
+                        <div class="admin-actions">
+                            <button class="accept-btn" onclick="updateApplication(${app.id}, 'Accepted')">Accept</button>
+                            <button class="reject-btn" onclick="updateApplication(${app.id}, 'Rejected')">Reject</button>
+                        </div>
+                    `;
+                    applicationsList.appendChild(card);
+                });
+            }
+            
+            // Load users
+            const usersList = document.getElementById('usersList');
+            usersList.innerHTML = '';
+            
+            const regularUsers = users.filter(user => !user.isAdmin);
+            
+            if (regularUsers.length === 0) {
+                usersList.innerHTML = '<p>No users found.</p>';
+            } else {
+                regularUsers.forEach(user => {
+                    const card = document.createElement('div');
+                    card.className = 'user-card';
+                    card.innerHTML = `
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <img src="${user.profilePic}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; object-fit: cover;">
+                            <div>
+                                <h4>${user.username} (${user.codmName})</h4>
+                                <p>Level: ${user.level} | MP: ${user.mpRank} | BR: ${user.brRank}</p>
+                            </div>
+                        </div>
+                        <p>Status: <span class="status-badge status-${user.status.toLowerCase()}">${user.status}</span></p>
+                        <p>Joined: ${formatDate(user.joinDate)}</p>
+                        <div class="admin-actions">
+                            <button class="accept-btn" onclick="updateUserStatus(${user.id}, 'Member')">Make Member</button>
+                            <button class="reject-btn" onclick="updateUserStatus(${user.id}, 'Applicant')">Set as Applicant</button>
+                            <button class="ban-btn" onclick="banUser(${user.id})">Ban User</button>
+                        </div>
+                    `;
+                    usersList.appendChild(card);
+                });
+            }
+            
+            // Load activity logs
+            loadActivityLogs();
+            
+            // Load notifications
+            loadNotifications();
+            
+            // Load clan settings
+            loadClanSettings();
+            
+            // Load website settings
+            loadWebsiteSettings();
+            
+            // Reset tabs to default
+            document.querySelectorAll('#adminDashboard .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#adminDashboard .tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelector('#adminDashboard .tab').classList.add('active');
+            document.querySelector('#adminDashboard .tab-content').classList.add('active');
+        }
+        
+        // Load activity logs
+        function loadActivityLogs() {
+            const activityLog = document.getElementById('activityLog');
+            activityLog.innerHTML = '';
+            
+            if (activityLogs.length === 0) {
+                activityLog.innerHTML = '<p>No activity logs found.</p>';
+                return;
+            }
+            
+            activityLogs.forEach(log => {
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+                
+                let icon = '';
+                let color = 'inherit';
+                
+                switch(log.type) {
+                    case 'login':
+                        icon = '🔒';
+                        break;
+                    case 'registration':
+                        icon = '🆕';
+                        color = 'var(--success)';
+                        break;
+                    case 'application':
+                        icon = '📝';
+                        color = 'var(--info)';
+                        break;
+                    case 'status-change':
+                        icon = '🔄';
+                        color = 'var(--warning)';
+                        break;
+                    case 'ban':
+                        icon = '❌';
+                        color = 'var(--danger)';
+                        break;
+                    case 'password-change':
+                        icon = '🔑';
+                        break;
+                    case 'account-delete':
+                        icon = '💀';
+                        color = 'var(--danger)';
+                        break;
+                    case 'clan-settings':
+                        icon = '⚙️';
+                        color = 'var(--primary)';
+                        break;
+                    case 'profile-update':
+                        icon = '🖼️';
+                        color = 'var(--info)';
+                        break;
+                    case 'website-settings':
+                        icon = '🌐';
+                        color = 'var(--legendary)';
+                        break;
+                    default:
+                        icon = 'ℹ️';
+                }
+                
+                item.innerHTML = `
+                    <div style="color: ${color}">${icon} ${log.message}</div>
+                    <div class="activity-time">${formatDate(log.timestamp)}</div>
+                `;
+                activityLog.appendChild(item);
+            });
+        }
+        
+        // Load notifications
+        function loadNotifications() {
+            const notificationsList = document.getElementById('notificationsList');
+            notificationsList.innerHTML = '';
+            
+            const adminNotifications = notifications
+                .filter(n => n.userId === 2) // Admin user ID is 2
+                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            if (adminNotifications.length === 0) {
+                notificationsList.innerHTML = '<p>No notifications found.</p>';
+                return;
+            }
+            
+            adminNotifications.forEach(notification => {
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+                
+                let icon = '';
+                let color = 'inherit';
+                
+                switch(notification.type) {
+                    case 'new-application':
+                        icon = '📝';
+                        color = 'var(--info)';
+                        break;
+                    case 'new-user':
+                        icon = '🆕';
+                        color = 'var(--success)';
+                        break;
+                    case 'user-action':
+                        icon = '👤';
+                        color = 'var(--warning)';
+                        break;
+                    default:
+                        icon = 'ℹ️';
+                }
+                
+                item.innerHTML = `
+                    <div style="color: ${color}">
+                        <strong>${notification.title}</strong><br>
+                        ${notification.message}
+                    </div>
+                    <div class="activity-time">${formatDate(notification.timestamp)}</div>
+                `;
+                
+                if (!notification.read) {
+                    item.style.backgroundColor = 'rgba(255, 70, 85, 0.1)';
+                    item.style.borderLeft = '3px solid var(--primary)';
+                    item.onclick = function() {
+                        markNotificationAsRead(notification.id);
+                        item.style.backgroundColor = '';
+                        item.style.borderLeft = '';
+                    };
+                }
+                
+                notificationsList.appendChild(item);
+            });
+        }
+        
+        // Load clan settings into form
+        function loadClanSettings() {
+            document.getElementById('clanName').value = clanSettings.name;
+            document.getElementById('clanTag').value = clanSettings.tag;
+            document.getElementById('clanLogo').value = clanSettings.logo;
+            document.getElementById('clanBannerUrl').value = clanSettings.banner;
+            document.getElementById('totalMembersSetting').value = clanSettings.stats.totalMembers;
+            document.getElementById('legendaryPlayersSetting').value = clanSettings.stats.legendaryPlayers;
+            document.getElementById('avgLevelSetting').value = clanSettings.stats.avgLevel;
+            document.getElementById('winRateSetting').value = clanSettings.stats.winRate;
+            
+            // Show previews if URLs exist
+            if (clanSettings.logo) {
+                document.getElementById('clanLogoPreview').src = clanSettings.logo;
+                document.getElementById('clanLogoPreview').style.display = 'block';
+            }
+            
+            if (clanSettings.banner) {
+                document.getElementById('clanBannerPreview').src = clanSettings.banner;
+                document.getElementById('clanBannerPreview').style.display = 'block';
+            }
+            
+            // Load activities
+            const activitiesContainer = document.getElementById('clanActivities');
+            activitiesContainer.innerHTML = '';
+            clanSettings.activities.forEach((activity, index) => {
+                addActivityField(activity.icon, activity.text, activity.daysAgo, 'activity' + (index + 1));
+            });
+            
+            // Load top members
+            const topMembersContainer = document.getElementById('topMembers');
+            topMembersContainer.innerHTML = '';
+            clanSettings.topMembers.forEach((member, index) => {
+                addTopMemberField(
+                    member.initials, 
+                    member.name, 
+                    member.level, 
+                    member.mpRank, 
+                    member.brRank, 
+                    member.avatar,
+                    'member' + (index + 1)
+                );
+            });
+        }
+        
+        // Load website settings into form
+        function loadWebsiteSettings() {
+            document.getElementById('websiteName').value = websiteSettings.name;
+            document.getElementById('websiteTagline').value = websiteSettings.tagline;
+            document.getElementById('websiteLogo').value = websiteSettings.logo;
+            document.getElementById('websiteBackground').value = websiteSettings.background;
+            document.getElementById('websiteTheme').value = websiteSettings.theme;
+            document.getElementById('websiteRegistration').value = websiteSettings.allowRegistration ? 'true' : 'false';
+            
+            // Show previews if URLs exist
+            if (websiteSettings.logo) {
+                document.getElementById('websiteLogoPreview').src = websiteSettings.logo;
+                document.getElementById('websiteLogoPreview').style.display = 'block';
+            }
+            
+            if (websiteSettings.background) {
+                document.getElementById('websiteBackgroundPreview').src = websiteSettings.background;
+                document.getElementById('websiteBackgroundPreview').style.display = 'block';
+            }
+        }
+        
+        // Add activity field
+        function addActivityField(icon = "ℹ️", text = "", daysAgo = 0, id = null) {
+            const activitiesContainer = document.getElementById('clanActivities');
+            const activityId = id || 'activity' + Date.now();
+            
+            const activityDiv = document.createElement('div');
+            activityDiv.className = 'activity-edit-item';
+            activityDiv.innerHTML = `
+                <button class="remove-activity" onclick="removeActivityField('${activityId}')">×</button>
+                <div class="form-group">
+                    <label>Icon</label>
+                    <input type="text" id="activityIcon_${activityId}" value="${icon}" placeholder="Enter emoji icon">
+                </div>
+                <div class="form-group">
+                    <label>Activity Text</label>
+                    <input type="text" id="activityText_${activityId}" value="${text}" placeholder="Enter activity description">
+                </div>
+                <div class="form-group">
+                    <label>Days Ago</label>
+                    <input type="number" id="activityDays_${activityId}" value="${daysAgo}" min="0" placeholder="How many days ago">
+                </div>
+            `;
+            
+            activitiesContainer.appendChild(activityDiv);
+        }
+        
+        // Add top member field
+        function addTopMemberField(initials = "", name = "", level = "", mpRank = "", brRank = "", avatar = "", id = null) {
+            const topMembersContainer = document.getElementById('topMembers');
+            const memberId = id || 'member' + Date.now();
+            
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'member-edit-item';
+            memberDiv.innerHTML = `
+                <button class="remove-member" onclick="removeMemberField('${memberId}')">×</button>
+                <div class="member-edit-fields">
+                    <div class="member-avatar-edit">
+                        <img id="memberAvatar_${memberId}" src="${avatar || 'https://via.placeholder.com/40'}" alt="${initials}">
+                        <input type="file" id="memberAvatarUpload_${memberId}" accept="image/*" style="display: none;" onchange="updateMemberAvatar('${memberId}')">
+                        <label for="memberAvatarUpload_${memberId}" style="position: absolute; bottom: -5px; right: -5px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer;">+</label>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="form-group">
+                            <input type="text" id="memberName_${memberId}" value="${name}" placeholder="Member name">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Level</label>
+                    <input type="number" id="memberLevel_${memberId}" value="${level}" min="1" max="400" placeholder="Member level">
+                </div>
+                <div class="rank-info">
+                    <div class="rank-column">
+                        <label>MP Rank</label>
+                        <select id="memberMPRank_${memberId}">
+                            <option value="Rookie" ${mpRank === "Rookie" ? "selected" : ""}>Rookie</option>
+                            <option value="Veteran" ${mpRank === "Veteran" ? "selected" : ""}>Veteran</option>
+                            <option value="Elite" ${mpRank === "Elite" ? "selected" : ""}>Elite</option>
+                            <option value="Pro" ${mpRank === "Pro" ? "selected" : ""}>Pro</option>
+                            <option value="Master" ${mpRank === "Master" ? "selected" : ""}>Master</option>
+                            <option value="Legendary" ${mpRank === "Legendary" ? "selected" : ""}>Legendary</option>
+                        </select>
+                    </div>
+                    <div class="rank-column">
+                        <label>BR Rank</label>
+                        <select id="memberBRRank_${memberId}">
+                            <option value="Rookie" ${brRank === "Rookie" ? "selected" : ""}>Rookie</option>
+                            <option value="Veteran" ${brRank === "Veteran" ? "selected" : ""}>Veteran</option>
+                            <option value="Elite" ${brRank === "Elite" ? "selected" : ""}>Elite</option>
+                            <option value="Pro" ${brRank === "Pro" ? "selected" : ""}>Pro</option>
+                            <option value="Master" ${brRank === "Master" ? "selected" : ""}>Master</option>
+                            <option value="Legendary" ${brRank === "Legendary" ? "selected" : ""}>Legendary</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+            
+            topMembersContainer.appendChild(memberDiv);
+        }
+        
+        // Remove activity field
+        function removeActivityField(id) {
+            if (document.querySelectorAll('.activity-edit-item').length <= 1) {
+                showNotification('error', 'You must have at least one activity item');
+                return;
+            }
+            
+            const activityDiv = document.querySelector(`.activity-edit-item button[onclick="removeActivityField('${id}')"]`)?.parentElement;
+            if (activityDiv) {
+                activityDiv.remove();
+            }
+        }
+        
+        // Remove member field
+        function removeMemberField(id) {
+            if (document.querySelectorAll('.member-edit-item').length <= 1) {
+                showNotification('error', 'You must have at least one top member');
+                return;
+            }
+            
+            const memberDiv = document.querySelector(`.member-edit-item button[onclick="removeMemberField('${id}')"]`)?.parentElement;
+            if (memberDiv) {
+                memberDiv.remove();
+            }
+        }
+        
+        // Save clan settings
+        function saveClanSettings() {
+            try {
+                // Basic info
+                clanSettings.name = document.getElementById('clanName').value || "GOATED Clan.CODM";
+                clanSettings.tag = document.getElementById('clanTag').value || "GOAT";
+                clanSettings.logo = document.getElementById('clanLogo').value;
+                clanSettings.banner = document.getElementById('clanBannerUrl').value;
+                
+                // Stats
+                clanSettings.stats = {
+                    totalMembers: parseInt(document.getElementById('totalMembersSetting').value) || 0,
+                    legendaryPlayers: parseInt(document.getElementById('legendaryPlayersSetting').value) || 0,
+                    avgLevel: parseInt(document.getElementById('avgLevelSetting').value) || 1,
+                    winRate: parseInt(document.getElementById('winRateSetting').value) || 0
+                };
+                
+                // Activities
+                clanSettings.activities = [];
+                const activityItems = document.querySelectorAll('.activity-edit-item');
+                activityItems.forEach(item => {
+                    const id = item.querySelector('button').onclick.toString().match(/'([^']+)'/)[1];
+                    clanSettings.activities.push({
+                        icon: document.getElementById(`activityIcon_${id}`).value || "ℹ️",
+                        text: document.getElementById(`activityText_${id}`).value || "",
+                        daysAgo: parseInt(document.getElementById(`activityDays_${id}`).value) || 0
+                    });
+                });
+                
+                // Top members
+                clanSettings.topMembers = [];
+                const memberItems = document.querySelectorAll('.member-edit-item');
+                memberItems.forEach(item => {
+                    const id = item.querySelector('button').onclick.toString().match(/'([^']+)'/)[1];
+                    clanSettings.topMembers.push({
+                        initials: document.getElementById(`memberName_${id}`).value.substring(0, 2).toUpperCase(),
+                        name: document.getElementById(`memberName_${id}`).value || "Unknown",
+                        level: parseInt(document.getElementById(`memberLevel_${id}`).value) || 1,
+                        mpRank: document.getElementById(`memberMPRank_${id}`).value || "Rookie",
+                        brRank: document.getElementById(`memberBRRank_${id}`).value || "Rookie",
+                        avatar: document.getElementById(`memberAvatar_${id}`).src
+                    });
+                });
+                
+                // Update clan info display
+                updateClanInfoDisplay();
+                
+                document.getElementById('clanSettingsError').textContent = "";
+                document.getElementById('clanSettingsSuccess').textContent = "Clan settings saved successfully!";
+                showNotification('success', 'Clan settings updated successfully!');
+                
+                // Log activity
+                const activity = {
+                    id: activityLogs.length + 1,
+                    type: "clan-settings",
+                    userId: currentUser.id,
+                    username: currentUser.username,
+                    message: `${currentUser.username} updated clan settings`,
+                    timestamp: new Date().toISOString()
+                };
+                activityLogs.unshift(activity);
+                
+            } catch (error) {
+                document.getElementById('clanSettingsError').textContent = "Error saving clan settings: " + error.message;
+                document.getElementById('clanSettingsSuccess').textContent = "";
+            }
+        }
+        
+        // Save website settings
+        function saveWebsiteSettings() {
+            try {
+                // Basic info
+                websiteSettings.name = document.getElementById('websiteName').value || "GOATED Clan.CODM";
+                websiteSettings.tagline = document.getElementById('websiteTagline').value || "Elite Mobile Warfare";
+                websiteSettings.logo = document.getElementById('websiteLogo').value;
+                websiteSettings.background = document.getElementById('websiteBackground').value;
+                websiteSettings.theme = document.getElementById('websiteTheme').value;
+                websiteSettings.allowRegistration = document.getElementById('websiteRegistration').value === 'true';
+                
+                // Update website display
+                updateWebsiteDisplay();
+                
+                document.getElementById('websiteSettingsError').textContent = "";
+                document.getElementById('websiteSettingsSuccess').textContent = "Website settings saved successfully!";
+                showNotification('success', 'Website settings updated successfully!');
+                
+                // Log activity
+                const activity = {
+                    id: activityLogs.length + 1,
+                    type: "website-settings",
+                    userId: currentUser.id,
+                    username: currentUser.username,
+                    message: `${currentUser.username} updated website settings`,
+                    timestamp: new Date().toISOString()
+                };
+                activityLogs.unshift(activity);
+                
+            } catch (error) {
+                document.getElementById('websiteSettingsError').textContent = "Error saving website settings: " + error.message;
+                document.getElementById('websiteSettingsSuccess').textContent = "";
+            }
+        }
+        
+        // Update clan info display
+        function updateClanInfoDisplay() {
+            // Update stats
+            document.getElementById('totalMembers').textContent = clanSettings.stats.totalMembers;
+            document.getElementById('legendaryPlayers').textContent = clanSettings.stats.legendaryPlayers;
+            document.getElementById('avgLevel').textContent = clanSettings.stats.avgLevel;
+            document.getElementById('winRate').textContent = clanSettings.stats.winRate + "%";
+            
+            // Update activities
+            const activityLog = document.getElementById('clanActivityLog');
+            if (activityLog) {
+                activityLog.innerHTML = '';
+                clanSettings.activities.forEach(activity => {
+                    const item = document.createElement('div');
+                    item.className = 'activity-item';
+                    item.innerHTML = `
+                        <div>${activity.icon} ${activity.text}</div>
+                        <div class="activity-time">${activity.daysAgo} day${activity.daysAgo !== 1 ? 's' : ''} ago</div>
+                    `;
+                    activityLog.appendChild(item);
+                });
+            }
+            
+            // Update top members
+            const memberList = document.getElementById('clanTopMembers');
+            if (memberList) {
+                memberList.innerHTML = '';
+                clanSettings.topMembers.forEach(member => {
+                    const item = document.createElement('div');
+                    item.className = 'member-item';
+                    item.innerHTML = `
+                        <div class="member-avatar"><img src="${member.avatar || 'https://via.placeholder.com/40'}" alt="${member.initials}"></div>
+                        <div class="member-info">
+                            <div class="member-name">${member.name}</div>
+                            <div class="member-details">Level ${member.level} | MP: ${member.mpRank} | BR: ${member.brRank}</div>
+                        </div>
+                    `;
+                    memberList.appendChild(item);
+                });
+            }
+            
+            // Update clan name in header if needed
+            const logoElements = document.querySelectorAll('.logo');
+            logoElements.forEach(el => {
+                el.textContent = clanSettings.name;
+            });
+            
+            // Update clan banner
+            const clanBannerImg = document.getElementById('clanBannerImg');
+            if (clanSettings.banner) {
+                clanBannerImg.src = clanSettings.banner;
+                clanBannerImg.style.display = 'block';
+            } else {
+                clanBannerImg.style.display = 'none';
+            }
+            
+            // Update logo preview
+            const logoPreview = document.getElementById('clanLogoPreview');
+            if (clanSettings.logo) {
+                logoPreview.src = clanSettings.logo;
+                logoPreview.style.display = 'block';
+            } else {
+                logoPreview.style.display = 'none';
+            }
+        }
+        
+        // Update website display
+        function updateWebsiteDisplay() {
+            // Update main logo and tagline
+            document.getElementById('mainLogo').textContent = websiteSettings.name;
+            document.getElementById('mainTagline').textContent = websiteSettings.tagline;
+            document.getElementById('registerLogo').textContent = "Join " + websiteSettings.name;
+            
+            // Update background
+            if (websiteSettings.background) {
+                document.body.style.backgroundImage = `url('${websiteSettings.background}')`;
+            }
+            
+            // Update logo preview
+            const logoPreview = document.getElementById('websiteLogoPreview');
+            if (websiteSettings.logo) {
+                logoPreview.src = websiteSettings.logo;
+                logoPreview.style.display = 'block';
+            } else {
+                logoPreview.style.display = 'none';
+            }
+            
+            // Update background preview
+            const backgroundPreview = document.getElementById('websiteBackgroundPreview');
+            if (websiteSettings.background) {
+                backgroundPreview.src = websiteSettings.background;
+                backgroundPreview.style.display = 'block';
+            } else {
+                backgroundPreview.style.display = 'none';
+            }
+            
+            // Update theme
+            applyTheme(websiteSettings.theme);
+        }
+        
+        // Apply theme
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            
+            switch(theme) {
+                case 'blue':
+                    root.style.setProperty('--primary', '#2196F3');
+                    break;
+                case 'green':
+                    root.style.setProperty('--primary', '#4CAF50');
+                    break;
+                case 'purple':
+                    root.style.setProperty('--primary', '#9c27b0');
+                    break;
+                case 'gold':
+                    root.style.setProperty('--primary', '#FFD700');
+                    break;
+                default: // default theme
+                    root.style.setProperty('--primary', '#ff4655');
+            }
+        }
+        
+        // Update application status
+        function updateApplication(id, status) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+            
+            applications = applications.map(a => {
+                if (a.id === id) {
+                    return {...a, status, reviewed: true};
+                }
+                return a;
+            });
+            
+            // Update user status if accepted
+            if (status === "Accepted") {
+                users = users.map(user => {
+                    if (user.id === app.userId) {
+                        return {...user, status: "Member"};
+                    }
+                    return user;
+                });
+            }
+            
+            // Log activity
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "status-change",
+                userId: app.userId,
+                username: app.username,
+                message: `Application ${status.toLowerCase()} for ${app.username} (${app.codmName})`,
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            
+            // Notify user
+            const notificationType = status === "Accepted" ? "success" : "warning";
+            const notificationMessage = status === "Accepted" 
+                ? `Congratulations! Your application to join ${clanSettings.name} has been accepted.` 
+                : `Your application to join ${clanSettings.name} has been rejected.`;
+            
+            addUserNotification(
+                app.userId,
+                "application-status",
+                "Application Update",
+                notificationMessage,
+                app.id
+            );
+            
+            // Show notification to admin
+            showNotification('success', `Application ${status.toLowerCase()} for ${app.username}`);
+            
+            showAdminDashboard();
+        }
+        
+        // Update user status
+        function updateUserStatus(userId, status) {
+            const user = users.find(u => u.id === userId);
+            if (!user) return;
+            
+            users = users.map(u => {
+                if (u.id === userId) {
+                    return {...u, status};
+                }
+                return u;
+            });
+            
+            // Log activity
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "status-change",
+                userId: user.id,
+                username: user.username,
+                message: `Status changed to ${status} for ${user.username}`,
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            
+            // Notify user
+            addUserNotification(
+                userId,
+                "status-change",
+                "Status Update",
+                `Your clan status has been updated to ${status}`,
+                userId
+            );
+            
+            showAdminDashboard();
+        }
+        
+        // Ban user
+        function banUser(userId) {
+            const user = users.find(u => u.id === userId);
+            if (!user) return;
+            
+            if (confirm(`Are you sure you want to ban ${user.username} (${user.codmName})? This action cannot be undone.`)) {
+                users = users.filter(u => u.id !== userId);
+                applications = applications.filter(app => app.userId !== userId);
+                
+                // Log activity
+                const activity = {
+                    id: activityLogs.length + 1,
+                    type: "ban",
+                    userId: user.id,
+                    username: user.username,
+                    message: `User banned: ${user.username} (${user.codmName})`,
+                    timestamp: new Date().toISOString()
+                };
+                activityLogs.unshift(activity);
+                
+                // Notify user if they're currently logged in
+                if (currentUser && currentUser.id === userId) {
+                    showNotification('error', 'Your account has been banned by an admin.');
+                    setTimeout(logout, 3000);
+                }
+                
+                showAdminDashboard();
+            }
+        }
+        
+        // Add user notification
+        function addUserNotification(userId, type, title, message, relatedId) {
+            const notification = {
+                id: notifications.length + 1,
+                userId,
+                type,
+                title,
+                message,
+                timestamp: new Date().toISOString(),
+                read: false,
+                relatedId
+            };
+            
+            notifications.push(notification);
+            
+            // Update admin notification badge if needed
+            if (userId === 2 && currentUser && currentUser.id === 2) {
+                unreadAdminNotifications++;
+                updateAdminNotificationBadge();
+            }
+            
+            return notification;
+        }
+        
+        // Mark notification as read
+        function markNotificationAsRead(id) {
+            notifications = notifications.map(n => {
+                if (n.id === id) {
+                    return {...n, read: true};
+                }
+                return n;
+            });
+            
+            if (currentUser && currentUser.id === 2) {
+                unreadAdminNotifications--;
+                updateAdminNotificationBadge();
+            }
+        }
+        
+        // Update admin notification badge
+        function updateAdminNotificationBadge() {
+            const badge = document.getElementById('adminNotificationBadge');
+            if (unreadAdminNotifications > 0) {
+                badge.textContent = unreadAdminNotifications;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+        
+        // Switch tabs in user dashboard
+        function switchTab(tabId) {
+            document.querySelectorAll('#userDashboard .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#userDashboard .tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+        
+        // Switch tabs in admin dashboard
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('#adminDashboard .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#adminDashboard .tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            
+            // Mark notifications as read when viewing them
+            if (tabId === 'notificationsTab') {
+                notifications.forEach(n => {
+                    if (n.userId === 2 && !n.read) {
+                        markNotificationAsRead(n.id);
+                    }
+                });
+            }
+        }
+        
+        // Show application form
+        function showApplicationForm() {
+            document.getElementById('applicationForm').style.display = 'block';
+            document.getElementById('statusMessage').style.display = 'none';
+        }
+        
+        // Hide application form
+        function hideApplicationForm() {
+            document.getElementById('applicationForm').style.display = 'none';
+            document.getElementById('statusMessage').style.display = 'block';
+        }
+        
+        // Submit application
+        function submitApplication() {
+            const reason = document.getElementById('applicationReason').value;
+            
+            if (!reason || reason.length < 100) {
+                alert("Please provide at least 100 characters explaining why you want to join!");
+                return;
+            }
+            
+            // Remove any existing application
+            applications = applications.filter(app => app.userId !== currentUser.id);
+            
+            const newApp = {
+                id: applications.length + 1,
+                userId: currentUser.id,
+                username: currentUser.username,
+                codmName: currentUser.codmName,
+                level: currentUser.level,
+                mpRank: currentUser.mpRank,
+                brRank: currentUser.brRank,
+                reason,
+                status: "Pending",
+                applyDate: new Date().toISOString(),
+                reviewed: false
+            };
+            
+            applications.push(newApp);
+            
+            // Update user status
+            users = users.map(user => {
+                if (user.id === currentUser.id) {
+                    return {...user, status: "Pending"};
+                }
+                return user;
+            });
+            
+            // Log activity
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "application",
+                userId: currentUser.id,
+                username: currentUser.username,
+                message: `New application submitted by ${currentUser.username}`,
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            
+            // Notify admin
+            addUserNotification(
+                2, // Admin user ID
+                "new-application",
+                "New Clan Application",
+                `${currentUser.username} has submitted an application to join the clan`,
+                newApp.id
+            );
+            
+            // Notify user
+            addUserNotification(
+                currentUser.id,
+                "application-status",
+                "Application Submitted",
+                "Your clan application has been submitted and is pending review",
+                newApp.id
+            );
+            
+            document.getElementById('applicationReason').value = "";
+            hideApplicationForm();
+            showUserDashboard();
+            
+            showNotification('success', 'Application submitted successfully! The admin has been notified.');
+        }
+        
+        // Change password
+        function changePassword() {
+            const currentPassword = document.getElementById('changePasswordCurrent').value;
+            const newPassword = document.getElementById('changePasswordNew').value;
+            const confirmPassword = document.getElementById('changePasswordConfirm').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                document.getElementById('passwordChangeError').textContent = "All fields are required!";
+                document.getElementById('passwordChangeSuccess').textContent = "";
+                return;
+            }
+            
+            if (currentUser.password !== currentPassword) {
+                document.getElementById('passwordChangeError').textContent = "Current password is incorrect!";
+                document.getElementById('passwordChangeSuccess').textContent = "";
+                return;
+            }
+            
+            if (newPassword.length < 8) {
+                document.getElementById('passwordChangeError').textContent = "New password must be at least 8 characters!";
+                document.getElementById('passwordChangeSuccess').textContent = "";
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                document.getElementById('passwordChangeError').textContent = "New passwords don't match!";
+                document.getElementById('passwordChangeSuccess').textContent = "";
+                return;
+            }
+            
+            // Update password
+            users = users.map(user => {
+                if (user.id === currentUser.id) {
+                    return {...user, password: newPassword};
+                }
+                return user;
+            });
+            
+            currentUser.password = newPassword;
+            
+            // Log activity
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "password-change",
+                userId: currentUser.id,
+                username: currentUser.username,
+                message: `Password changed for ${currentUser.username}`,
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            
+            document.getElementById('passwordChangeError').textContent = "";
+            document.getElementById('passwordChangeSuccess').textContent = "Password changed successfully!";
+            
+            // Clear fields
+            document.getElementById('changePasswordCurrent').value = "";
+            document.getElementById('changePasswordNew').value = "";
+            document.getElementById('changePasswordConfirm').value = "";
+            
+            showNotification('success', 'Password changed successfully!');
+        }
+        
+        // Confirm account deletion
+        function confirmDeleteAccount() {
+            if (confirm("Are you absolutely sure you want to delete your account? This will permanently remove all your data and cannot be undone.")) {
+                deleteAccount();
+            }
+        }
+        
+        // Delete account
+        function deleteAccount() {
+            // Log activity before deletion
+            const activity = {
+                id: activityLogs.length + 1,
+                type: "account-delete",
+                userId: currentUser.id,
+                username: currentUser.username,
+                message: `Account deleted: ${currentUser.username} (${currentUser.codmName})`,
+                timestamp: new Date().toISOString()
+            };
+            activityLogs.unshift(activity);
+            
+            // Notify admin
+            addUserNotification(
+                2, // Admin user ID
+                "user-action",
+                "Account Deleted",
+                `${currentUser.username} has deleted their account`,
+                currentUser.id
+            );
+            
+            // Remove user data
+            users = users.filter(user => user.id !== currentUser.id);
+            applications = applications.filter(app => app.userId !== currentUser.id);
+            
+            // Logout
+            logout();
+            showNotification('error', 'Your account has been permanently deleted.', 3000);
+        }
+        
+        // Logout
+        function logout() {
+            if (currentUser) {
+                // Log activity
+                const activity = {
+                    id: activityLogs.length + 1,
+                    type: "logout",
+                    userId: currentUser.id,
+                    username: currentUser.username,
+                    message: `User logged out: ${currentUser.username}`,
+                    timestamp: new Date().toISOString()
+                };
+                activityLogs.unshift(activity);
+            }
+            
+            currentUser = null;
+            document.getElementById('username').value = "";
+            document.getElementById('password').value = "";
+            document.getElementById('adminUsername').value = "";
+            document.getElementById('adminPassword').value = "";
+            showLogin();
+        }
+        
+        // Initialize
+        showLogin();
+        updateWebsiteDisplay();
+    </script>
+</body>
+</html>
