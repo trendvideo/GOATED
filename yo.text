@@ -1,0 +1,4 @@
+MONGODB_URI=mongodb://localhost:27017/gmail_registration
+EMAIL_USER=yourgmail@gmail.com
+EMAIL_PASS=yourgmailapppassword
+PORT=3000
